@@ -3,16 +3,20 @@
 /**
  * Module dependencies.
  */
+const path = require('path');
+
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 var app = require('../app');
 var debug = require('debug')('amused-product-management-system:server');
 var http = require('http');
-
+const logger = require('../lib/logger');
+const { PORT } = require('../secret-configs');
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(PORT || '4000');
 app.set('port', port);
 
 /**
@@ -87,4 +91,5 @@ function onListening() {
     ? 'pipe ' + addr
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
+  logger.info(`Server is running on port: ${port}`);
 }
