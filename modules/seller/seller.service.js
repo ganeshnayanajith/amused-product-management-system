@@ -67,11 +67,24 @@ class SellerService {
       throw new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.BAD_REQUEST_ERROR, 'Invalid credentials!');
     }
 
-    const accessToken = await Utils.generateToken({ userId: seller.id, email: seller.email, role: seller.role });
+    const accessToken = await Utils.generateToken({ userId: seller.id.S, email: seller.email.S, role: seller.role.S });
 
     return accessToken;
   }
 
+  static async getSellerByIdAndEmail(id, email) {
+    const command = new ScanCommand({
+      TableName: TABLE_NAME,
+      FilterExpression: 'id = :id AND email = :email',
+      ExpressionAttributeValues: {
+        ':id': { S: id },
+        ':email': { S: email }
+      }
+    });
+    const result = await dynamoDB.send(command);
+
+    return result.Items[0];
+  }
 }
 
 module.exports = SellerService;
