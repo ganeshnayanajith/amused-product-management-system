@@ -11,11 +11,17 @@ const { LOW_STOCK_THRESHOLD } = require('../../secret-configs');
 class ProductService {
 
   static async createProduct(sellerId, productData) {
+
+    const existingProduct = await this.getProductByName(sellerId, productData.productName);
+    if (existingProduct) {
+      throw new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.VALIDATION_ERROR, 'Product already exists');
+    }
+
     const id = crypto.randomUUID();
     const product = new Product(
       id,
       sellerId,
-      productData.name,
+      productData.productName,
       productData.description,
       productData.price,
       productData.quantity,
@@ -64,6 +70,21 @@ class ProductService {
     return result.Items[0];
   }
 
+  static async getProductByName(sellerId, productName) {
+    const command = new ScanCommand({
+      TableName: TABLE_NAME,
+      FilterExpression: 'productName = :productName AND sellerId = :sellerId',
+      ExpressionAttributeValues: {
+        ':productName': productName,
+        ':sellerId': sellerId
+      }
+    });
+
+    const result = await dynamoDB.send(command);
+    logger.info(result);
+    return result.Items[0];
+  }
+
   static async deleteProduct(sellerId, id) {
     try {
 
@@ -89,6 +110,10 @@ class ProductService {
   }
 
   static async updateProduct(sellerId, id, updates) {
+    const existingProduct = await this.getProductByName(sellerId, updates.productName);
+    if (existingProduct) {
+      throw new CustomHttpError(HTTP_CODES.BAD_REQUEST, ERRORS.VALIDATION_ERROR, 'Product already exists');
+    }
     let updateExpression = 'SET updatedAt = :updatedAt';
     const expressionAttributeNames = {};
     const expressionAttributeValues = {
@@ -96,10 +121,10 @@ class ProductService {
       ':updatedAt': new Date().toISOString()
     };
 
-    if (updates.name) {
-      updateExpression += ', #name = :name';
-      expressionAttributeNames['#name'] = 'name';
-      expressionAttributeValues[':name'] = updates.name;
+    if (updates.productName) {
+      updateExpression += ', #productName = :productName';
+      expressionAttributeNames['#productName'] = 'productName';
+      expressionAttributeValues[':productName'] = updates.productName;
     }
 
     if (updates.description) {

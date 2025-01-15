@@ -42,7 +42,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"p1\"\r\n}",
+							"raw": "{\r\n    \"productName\": \"p111\",\r\n    \"description\": \"description\",\r\n    \"price\": 50,\r\n    \"category\": \"category\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -159,11 +159,21 @@
 				{
 					"name": "update product",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDUzMTIxZC01M2YxLTQ0OWItYTdkYS0xOThlMGJlZWUzMDciLCJlbWFpbCI6ImdhbmVzaDJAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTczNjkyNDI3MywiZXhwIjoxNzM3MDEwNjczfQ.QMFTYeib_PAqQA3tjZOYNhUJw_7HhjIFJBsJBsY__Co",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"s2\",\r\n    \"quantity\": 5\r\n}",
+							"raw": "{\r\n    \"productName\": \"p111111\",\r\n    \"quantity\": 5\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -171,7 +181,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:4000/api/products/1736352858672",
+							"raw": "http://localhost:4000/api/products/15b7ece3-6241-46fd-8551-e3d3eda21e08",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -180,7 +190,7 @@
 							"path": [
 								"api",
 								"products",
-								"1736352858672"
+								"15b7ece3-6241-46fd-8551-e3d3eda21e08"
 							]
 						}
 					},
