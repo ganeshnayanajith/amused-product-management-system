@@ -5,7 +5,7 @@ const { HTTP_CODES, ERRORS } = require('../../lib/constants');
 const schemaCreateProduct = Joi.object().keys({
   productName: Joi.string().required(),
   description: Joi.string().required(),
-  price: Joi.number().required(),
+  price: Joi.number().required().positive(),
   quantity: Joi.number().default(0),
   category: Joi.string().required(),
 });

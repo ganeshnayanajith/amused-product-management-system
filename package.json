@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "test": "mocha test/**/*.test.js --exit"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.724.0",
