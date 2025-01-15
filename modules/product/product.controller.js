@@ -5,7 +5,7 @@ const ProductService = require('./product.service');
 
 exports.createProduct = async (req, res) => {
   try {
-    const sellerId = req.user?.id || 'default-seller';
+    const sellerId = req.user.userId;
     const product = await ProductService.createProduct(sellerId, req.body);
     Utils.successResponse(res, HTTP_CODES.CREATED, 'Product created successfully', product);
   } catch (error) {
@@ -15,7 +15,8 @@ exports.createProduct = async (req, res) => {
 
 exports.getAllProducts = async (req, res) => {
   try {
-    const products = await ProductService.getAllProducts();
+    const sellerId = req.user.userId;
+    const products = await ProductService.getAllProducts(sellerId);
     Utils.successResponse(res, HTTP_CODES.OK, 'Products fetched successfully', products);
   } catch (error) {
     Utils.errorResponse(res, error);
@@ -24,7 +25,8 @@ exports.getAllProducts = async (req, res) => {
 
 exports.getProduct = async (req, res) => {
   try {
-    const product = await ProductService.getProduct(req.params.id);
+    const sellerId = req.user.userId;
+    const product = await ProductService.getProduct(sellerId, req.params.id);
     if (!product) {
       throw new CustomHttpError(HTTP_CODES.NOT_FOUND, ERRORS.NOT_FOUND_ERROR, 'Product not found');
     }
@@ -36,7 +38,7 @@ exports.getProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
-    const sellerId = req.user?.id || 'default-seller';
+    const sellerId = req.user.userId;
     await ProductService.deleteProduct(sellerId, req.params.id);
     Utils.successResponse(res, HTTP_CODES.OK, 'Product deleted successfully', true);
   } catch (error) {
@@ -46,7 +48,7 @@ exports.deleteProduct = async (req, res) => {
 
 exports.updateProduct = async (req, res) => {
   try {
-    const sellerId = req.user?.id || 'default-seller';
+    const sellerId = req.user.userId;
     const product = await ProductService.updateProduct(sellerId, req.params.id, req.body);
     if (!product) {
       throw new CustomHttpError(HTTP_CODES.NOT_FOUND, ERRORS.NOT_FOUND_ERROR, 'Product not found');

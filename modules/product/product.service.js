@@ -1,6 +1,6 @@
 const Product = require('./product.model');
 const { dynamoDB } = require('../../config/aws-config');
-const { PutCommand, GetCommand, ScanCommand, DeleteCommand, UpdateCommand } = require("@aws-sdk/lib-dynamodb");
+const { PutCommand, ScanCommand, DeleteCommand, UpdateCommand } = require("@aws-sdk/lib-dynamodb");
 const logger = require('../../lib/logger');
 const CustomHttpError = require('../../lib/custom-http-error');
 const { HTTP_CODES, ERRORS } = require('../../lib/constants');
@@ -35,9 +35,13 @@ class ProductService {
     return product;
   }
 
-  static async getAllProducts() {
+  static async getAllProducts(sellerId) {
     const command = new ScanCommand({
-      TableName: TABLE_NAME
+      TableName: TABLE_NAME,
+      FilterExpression: 'sellerId = :sellerId',
+      ExpressionAttributeValues: {
+        ':sellerId': sellerId
+      }
     });
 
     const result = await dynamoDB.send(command);
@@ -45,20 +49,24 @@ class ProductService {
     return result.Items;
   }
 
-  static async getProduct(id) {
-    const command = new GetCommand({
+  static async getProduct(sellerId, id) {
+    const command = new ScanCommand({
       TableName: TABLE_NAME,
-      Key: { id }
+      FilterExpression: 'id = :id AND sellerId = :sellerId',
+      ExpressionAttributeValues: {
+        ':id': id,
+        ':sellerId': sellerId
+      }
     });
 
     const result = await dynamoDB.send(command);
     logger.info(result);
-    return result.Item;
+    return result.Items[0];
   }
 
   static async deleteProduct(sellerId, id) {
-
     try {
+
       const command = new DeleteCommand({
         TableName: TABLE_NAME,
         Key: { id },
