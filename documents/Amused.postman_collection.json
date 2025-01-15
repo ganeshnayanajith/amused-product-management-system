@@ -1,0 +1,252 @@
+{
+	"info": {
+		"_postman_id": "07ca5c08-0c2a-4747-9b84-b327d57d58e9",
+		"name": "Amused",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24347292"
+	},
+	"item": [
+		{
+			"name": "Test",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000"
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDUzMTIxZC01M2YxLTQ0OWItYTdkYS0xOThlMGJlZWUzMDciLCJlbWFpbCI6ImdhbmVzaDJAZ21haWwuY29tIiwicm9sZSI6InNlbGxlciIsImlhdCI6MTczNjkyNDI3MywiZXhwIjoxNzM3MDEwNjczfQ.QMFTYeib_PAqQA3tjZOYNhUJw_7HhjIFJBsJBsY__Co",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"p1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwYjA5OGE3OC03OTc1LTQ5M2ItYjY1My0xZjg4Nzk5ZDA1YzkiLCJlbWFpbCI6ImdhbmVzaEBnbWFpbC5jb20iLCJyb2xlIjoic2VsbGVyIiwiaWF0IjoxNzM2OTE1MjE3LCJleHAiOjE3MzcwMDE2MTd9.Htz5c4BDI20TqHXmmizOrBw86rGCPuogi8OS5ucGHEk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwYjA5OGE3OC03OTc1LTQ5M2ItYjY1My0xZjg4Nzk5ZDA1YzkiLCJlbWFpbCI6ImdhbmVzaEBnbWFpbC5jb20iLCJyb2xlIjoic2VsbGVyIiwiaWF0IjoxNzM2OTE1MjE3LCJleHAiOjE3MzcwMDE2MTd9.Htz5c4BDI20TqHXmmizOrBw86rGCPuogi8OS5ucGHEk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/products/f348607f-9ec1-42c8-a59c-85ad6701e9c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products",
+								"f348607f-9ec1-42c8-a59c-85ad6701e9c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwYjA5OGE3OC03OTc1LTQ5M2ItYjY1My0xZjg4Nzk5ZDA1YzkiLCJlbWFpbCI6ImdhbmVzaEBnbWFpbC5jb20iLCJyb2xlIjoic2VsbGVyIiwiaWF0IjoxNzM2OTE1MjE3LCJleHAiOjE3MzcwMDE2MTd9.Htz5c4BDI20TqHXmmizOrBw86rGCPuogi8OS5ucGHEk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4000/api/products/f348607f-9ec1-42c8-a59c-85ad6701e9c8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products",
+								"f348607f-9ec1-42c8-a59c-85ad6701e9c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"s2\",\r\n    \"quantity\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/products/1736352858672",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"products",
+								"1736352858672"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seller register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"ganesh2\",\r\n    \"email\": \"ganesh2@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/sellers/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"sellers",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "seller login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ganesh@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/api/sellers/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"api",
+								"sellers",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
